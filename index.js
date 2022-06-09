@@ -17,13 +17,53 @@ const fileManager = async () => {
         });
 
         process.stdin.on('data', (chunk) => {
-            const str = chunk.toString();
+            const str = chunk.toString().trim();
 
             if (str.includes('.exit')) {
                 process.stdout.write(
                     `Thank you for using File Manager, ${getNameUser()}!\n`
                 );
                 process.exit();
+            }
+        });
+
+        process.stdin.on('data', (chunk) => {
+            const str = chunk.toString().trim();
+
+            if (str.includes('os --cpus')) {
+                console.log(os.cpus());
+            }
+        });
+
+        process.stdin.on('data', (chunk) => {
+            const str = chunk.toString().trim();
+
+            if (str.includes('os --homedir')) {
+                console.log(os.homedir());
+            }
+        });
+
+        process.stdin.on('data', (chunk) => {
+            const str = chunk.toString().trim();
+
+            if (str.includes('os --username')) {
+                console.log(os.userInfo().username);
+            }
+        });
+
+        process.stdin.on('data', (chunk) => {
+            const str = chunk.toString().trim();
+
+            if (str.includes('os --architecture')) {
+                console.log(os.arch());
+            }
+        });
+
+        process.stdin.on('data', (chunk) => {
+            const str = chunk.toString().trim();
+
+            if (str.includes('os --EOL')) {
+                console.log(JSON.stringify(os.EOL));
             }
 
             showInfoDir(thisDir);
