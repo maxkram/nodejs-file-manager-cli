@@ -31,7 +31,7 @@ const fileManager = async () => {
             const str = chunk.toString().trim();
 
             if (str.includes('os --cpus')) {
-                console.log(os.cpus());
+                console.table(os.cpus());
             }
         });
 
