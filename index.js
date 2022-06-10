@@ -52,6 +52,42 @@ const fileManager = async () => {
                 }
                 break;
             }
+            case 'up': {
+                break;
+            }
+            case 'ls': {
+                break;
+            }
+            case 'cat': {
+                break;
+            }
+            case 'add': {
+                break;
+            }
+            case 'rn': {
+                break;
+            }
+            case 'cp': {
+                break;
+            }
+            case 'mv': {
+                break;
+            }
+            case 'rm': {
+                break;
+            }
+            case 'os': {
+                break;
+            }
+            case 'hast': {
+                break;
+            }
+            case 'compress': {
+                break;
+            }
+            case 'decompress': {
+                break;
+            }
         }
     }).on('close', () => {
         console.log(`Thank you for using File Manager, ${getNameUser()}`);
