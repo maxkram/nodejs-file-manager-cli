@@ -11,6 +11,7 @@ import isAccess from './utils/isAccess.js';
 import listDir from './fs/listDir.js';
 import commandClose from './utils/commandClose.js';
 import parseArgs from './cli/args.js';
+import { read } from './fs/read.js';
 
 function fileManager() {
     // try {
@@ -42,16 +43,16 @@ function fileManager() {
                     const isRealAccess = await isAccess(cwd);
                     if (isRealAccess) {
                         process.chdir(cwd);
-                        commandClose();
+                        commandClose(cwd);
                     } else {
                         process.stdout.write(
                             `Сорян, нету такой папки. Уточните, что там после cd.\n`
                         );
-                        commandClose();
+                        commandClose(cwd);
                     }
                 } else {
                     process.stdout.write(`Определитесь с папкой после 'cd'.\n`);
-                    commandClose();
+                    commandClose(cwd);
                 }
                 break;
             }
@@ -63,7 +64,7 @@ function fileManager() {
                 } else {
                     cwd = path.join(cwd, '..');
                     process.chdir(cwd);
-                    commandClose();
+                    commandClose(cwd);
                 }
                 break;
             }
@@ -72,6 +73,13 @@ function fileManager() {
                 break;
             }
             case 'cat': {
+                if (args.length > 0) {
+                    const userTo = args.join(' ');
+                    await read(userTo, cwd);
+                } else {
+                    process.stdout.write(`Уточните путь после add\n`);
+                    commandClose(cwd);
+                }
                 break;
             }
             case 'add': {

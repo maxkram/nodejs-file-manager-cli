@@ -15,7 +15,7 @@ const listDir = async (pathTo) => {
                     let fileName = path.join(pathTo, file);
                     await fs.stat(fileName, (err, stats) => {
                         if (err) {
-                            console.log(`FS operation failed!`);
+                            console.log(`FS operation failed`);
                             return;
                         }
                         if (stats.isFile()) {
@@ -39,7 +39,7 @@ const listDir = async (pathTo) => {
             commandClose();
         }
     } catch (error) {
-        console.log(`FS operation failed!\n${error}`);
+        console.log(`FS operation failed\n`);
         commandClose();
     }
 };
