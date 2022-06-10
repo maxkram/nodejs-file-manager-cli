@@ -65,6 +65,7 @@ const fileManager = async () => {
                 break;
             }
             case 'ls': {
+                
                 break;
             }
             case 'cat': {
