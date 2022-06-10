@@ -15,15 +15,15 @@ const fileManager = async () => {
 
     process.stdout.write(`Welcome to the File Manager, ${getNameUser()}\n`);
     // showInfoDir(thisDir);
-    process.stdout.write(`You currently in: ${thisDir}`);
+    process.stdout.write(`You currently in: ${thisDir}\n`);
 
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout,
     });
 
-    rl.on('str', async (str) => {
-        const [cmd, ...args] = line.toString().trim().split(' ');
+    rl.on('line', async (str) => {
+        const [cmd, ...args] = str.toString().trim().split(' ');
 
         switch (cmd) {
             case '.exit':
@@ -53,6 +53,15 @@ const fileManager = async () => {
                 break;
             }
             case 'up': {
+                if (thisDir === os.homedir()) {
+                    process.stdout.write(
+                        `А все, выше нельзя. Это рут: ${os.homedir()}\n`
+                    );
+                } else {
+                    thisDir = path.join(thisDir, '..');
+                    process.chdir(thisDir);
+                    closePhrase();
+                }
                 break;
             }
             case 'ls': {
