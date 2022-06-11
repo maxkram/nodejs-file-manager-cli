@@ -1,0 +1,24 @@
+{
+  "name": "nodejs-file-manager-cli",
+  "version": "1.0.0",
+  "description": "task #2 RS School NodeJS",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxkram/nodejs-file-manager-cli.git"
+  },
+  "keywords": [
+    "maxkram"
+  ],
+  "author": "maxkram",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxkram/nodejs-file-manager-cli/issues"
+  },
+  "homepage": "https://github.com/maxkram/nodejs-file-manager-cli#readme"
+}
