@@ -15,6 +15,9 @@ import { read } from './fs/read.js';
 import { add } from './fs/add.js';
 import { rename } from './fs/rename.js';
 import { copy } from './fs/copy.js';
+import { move } from './fs/move.js';
+import { remove } from './fs/remove.js';
+
 
 function fileManager() {
     // try {
@@ -122,9 +125,28 @@ function fileManager() {
                 break;
             }
             case 'mv': {
+                if (args.length > 1) {
+                    const file = args.slice(0, -1).join(' ');
+                    const newPlace = args[args.length - 1];
+                    await move(file, newPlace, cwd);
+                } else {
+                    process.stdout.write(
+                        `Определитесь, пжлста, откуда и куда будем двигать файлик\n`
+                    );
+                    commandClose(cwd);
+                }
                 break;
             }
             case 'rm': {
+                if (args.length > 0) {
+                    const file = args.join(' ');
+                    await remove(file, cwd);
+                } else {
+                    process.stdout.write(
+                        `Определитесь, пжлста, что будем уничтожать\n`
+                    );
+                    commandClose(cwd);
+                }
                 break;
             }
             case 'os': {
