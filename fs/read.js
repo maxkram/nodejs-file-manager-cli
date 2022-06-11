@@ -1,10 +1,10 @@
-import { getAbsolutePath } from '../utils/getAbsolutePath.js';
+import fs from 'fs';
+import { getPath } from '../utils/getPath.js';
 import { isAccess } from '../utils/isAccess.js';
 import { commandClose } from '../utils/commandClose.js';
-import fs from 'fs';
 
 export const read = async (filePath, cwd) => {
-    const absolutePath = getAbsolutePath(filePath, cwd);
+    const absolutePath = getPath(filePath, cwd);
     const existPath = await isAccess(absolutePath);
     if (existPath) {
         try {

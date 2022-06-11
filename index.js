@@ -13,6 +13,8 @@ import commandClose from './utils/commandClose.js';
 import parseArgs from './cli/args.js';
 import { read } from './fs/read.js';
 import { add } from './fs/add.js';
+import { rename } from './fs/rename.js';
+import { copy } from './fs/copy.js';
 
 function fileManager() {
     // try {
@@ -94,9 +96,29 @@ function fileManager() {
                 break;
             }
             case 'rn': {
+                if (args.length > 1) {
+                    const file = args.slice(0, -1).join(' ');
+                    const newName = args[args.length - 1];
+                    await rename(file, newName, cwd);
+                } else {
+                    process.stdout.write(
+                        `Задайте текущее и желаемое имя файла\n`
+                    );
+                    commandClose(cwd);
+                }
                 break;
             }
             case 'cp': {
+                if (args.length > 1) {
+                    const file = args.slice(0, -1).join(' ');
+                    const newPlace = args[args.length - 1];
+                    await copy(file, newPlace, cwd);
+                } else {
+                    process.stdout.write(
+                        `Уточните, пжлста, старый и новый пути файла\n`
+                    );
+                    commandClose(cwd);
+                }
                 break;
             }
             case 'mv': {
