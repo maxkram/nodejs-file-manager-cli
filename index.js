@@ -12,6 +12,7 @@ import listDir from './fs/listDir.js';
 import commandClose from './utils/commandClose.js';
 import parseArgs from './cli/args.js';
 import { read } from './fs/read.js';
+import { add } from './fs/add.js';
 
 function fileManager() {
     // try {
@@ -83,6 +84,13 @@ function fileManager() {
                 break;
             }
             case 'add': {
+                if (args.length > 0) {
+                    const userPath = args.join(' ');
+                    await add(userPath, cwd);
+                } else {
+                    process.stdout.write(`А уточните путь к файлу, пжлста\n`);
+                    commandClose(cwd);
+                }
                 break;
             }
             case 'rn': {
@@ -143,7 +151,7 @@ function fileManager() {
                 }
                 break;
             }
-            case 'hast': {
+            case 'hash': {
                 break;
             }
             case 'compress': {
