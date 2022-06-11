@@ -17,7 +17,7 @@ import { rename } from './fs/rename.js';
 import { copy } from './fs/copy.js';
 import { move } from './fs/move.js';
 import { remove } from './fs/remove.js';
-
+import { calculateHash } from './fs/calculateHash.js';
 
 function fileManager() {
     // try {
@@ -196,6 +196,15 @@ function fileManager() {
                 break;
             }
             case 'hash': {
+                if (args.length > 0) {
+                    const thePath = args.join(' ');
+                    await calculateHash(thePath, cwd);
+                } else {
+                    process.stdout.write(
+                        `Определитесь, пжлста, с путем к файлу\n`
+                    );
+                }
+                commandClose(cwd);
                 break;
             }
             case 'compress': {
