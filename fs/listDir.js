@@ -5,13 +5,13 @@ import { isAccess } from '../utils/isAccess.js';
 
 const listDir = async (pathTo) => {
     try {
-        const dirExist = isAccess(pathTo);
-        if (dirExist) {
+        const hasAccess = isAccess(pathTo);
+        if (hasAccess) {
             await fs.readdir(pathTo, (err, files) => {
                 if (err) {
                     console.log(err);
                 }
-                files.forEach(async (file, index) => {
+                files.forEach(async (file) => {
                     let fileName = path.join(pathTo, file);
                     await fs.stat(fileName, (err, stats) => {
                         if (err) {

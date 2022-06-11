@@ -1,12 +1,6 @@
 import os from 'os';
-import process from 'process';
 import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 import readline from 'readline';
-import showInfoDir from './showInfoDir.js';
-import getHomeDir from './getHomeDir.js';
-import getUserName from './utils/getNameUser.js';
 import isAccess from './utils/isAccess.js';
 import listDir from './fs/listDir.js';
 import commandClose from './utils/commandClose.js';
@@ -17,7 +11,9 @@ import { rename } from './fs/rename.js';
 import { copy } from './fs/copy.js';
 import { move } from './fs/move.js';
 import { remove } from './fs/remove.js';
-import { calculateHash } from './fs/calculateHash.js';
+import { calcHash } from './fs/calcHash.js';
+import { compress } from './cli/zip.js';
+import { decompress } from './cli/unzip.js';
 
 function fileManager() {
     // try {
@@ -183,7 +179,7 @@ function fileManager() {
                             process.stdout.write(
                                 `Хмм.. ${arg}. Нет такой команды\n`
                             );
-                            commandClosingMsg(cwd);
+                            commandClose(cwd);
                             break;
                         }
                     }
@@ -191,14 +187,14 @@ function fileManager() {
                     process.stdout.write(
                         `Наберите аргументик после "os". Например, -- и EOL, cpus и т.д.\n`
                     );
-                    commandClosingMsg(cwd);
+                    commandClose(cwd);
                 }
                 break;
             }
             case 'hash': {
                 if (args.length > 0) {
                     const thePath = args.join(' ');
-                    await calculateHash(thePath, cwd);
+                    await calcHash(thePath, cwd);
                 } else {
                     process.stdout.write(
                         `Определитесь, пжлста, с путем к файлу\n`
@@ -208,9 +204,32 @@ function fileManager() {
                 break;
             }
             case 'compress': {
+                if (args.length > 1) {
+                    const fileZip = args.slice(0, -1).join(' ');
+                    const bro = args[args.length - 1];
+                    await compress(fileZip, bro, cwd);
+                } else {
+                    process.stdout.write(
+                        `Определитесь что и во что жмем, пжлста\n`
+                    );
+                    commandClose(cwd);
+                }
                 break;
             }
             case 'decompress': {
+                if (args.length > 1) {
+                    const fileFrom = args.slice(0, -1).join(' ');
+                    const fileTo = args[args.length - 1];
+                    await decompress(fileFrom, fileTo, cwd);
+                } else {
+                    process.stdout.write(`Определитесь с путями к файлику\r\n`);
+                    commandClose(cwd);
+                }
+                break;
+            }
+            default: {
+                process.stdout.write(`Invalid input\n`);
+                commandClose(cwd);
                 break;
             }
         }

@@ -6,8 +6,8 @@ import { commandClose } from '../utils/commandClose.js';
 export const move = async (file, newPlace, cwd) => {
     try {
         const absolutePath = getPath(file, cwd);
-        const isAccess = await isAccess(absolutePath);
-        if (isAccess) {
+        const hasAccess = await isAccess(absolutePath);
+        if (hasAccess) {
             await fs.copyFile(absolutePath, getPath(newPlace, cwd));
             await fs.rm(absolutePath);
             process.stdout.write(`\nФайлик ${file} послан в ${newPlace}\n`);

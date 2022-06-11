@@ -5,8 +5,8 @@ import { commandClose } from '../utils/commandClose.js';
 
 export const read = async (filePath, cwd) => {
     const absolutePath = getPath(filePath, cwd);
-    const existPath = await isAccess(absolutePath);
-    if (existPath) {
+    const hasAccess = await isAccess(absolutePath);
+    if (hasAccess) {
         try {
             const readableStream = fs.createReadStream(absolutePath, 'utf-8');
             readableStream.on('data', (chunk) => {

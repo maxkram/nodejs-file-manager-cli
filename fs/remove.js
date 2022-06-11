@@ -6,8 +6,8 @@ import { commandClose } from '../utils/commandClose.js';
 export const remove = async (file, cwd) => {
     try {
         const absolutePath = getPath(file, cwd);
-        const isAccess = await isAccess(absolutePath);
-        if (isAccess) {
+        const hasAccess = await isAccess(absolutePath);
+        if (hasAccess) {
             await fs.rm(absolutePath);
             process.stdout.write(`\nА все, стерли ${file} насовсем\n`);
             commandClose(cwd);

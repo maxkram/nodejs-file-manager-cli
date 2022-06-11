@@ -3,8 +3,7 @@ export const parseArgs = () => {
         const userArgs = process.argv.slice(2).toString();
 
         if (userArgs.startsWith('--')) {
-            const userName = userArgs.split('=')[1];
-            return userName;
+            return userArgs.split('=')[1];
         } else {
             return 'Проверьте, вы точно ввели "-- --": npm run start -- --username=your_username';
         }

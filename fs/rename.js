@@ -6,8 +6,8 @@ import { commandClose } from '../utils/commandClose.js';
 export const rename = async (file, newName, cwd) => {
     try {
         const absolutePath = getPath(file, cwd);
-        const isPath = await isAccess(absolutePath);
-        if (isPath) {
+        const hasAccess = await isAccess(absolutePath);
+        if (hasAccess) {
             await fs.rename(absolutePath, getPath(newName, cwd));
             process.stdout.write(`\n${file} переименован в ${newName}\n`);
             commandClose(cwd);
